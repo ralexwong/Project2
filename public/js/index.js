@@ -1,8 +1,12 @@
+// http://api-public.guidebox.com/v2/{endpoint}  <---- BASE API URL
+
 // Get references to page elements
 var $exampleText = $("#example-text");
 var $exampleDescription = $("#example-description");
 var $submitBtn = $("#submit");
 var $exampleList = $("#example-list");
+
+
 
 // The API object contains methods for each kind of request we'll make
 var API = {
@@ -18,7 +22,7 @@ var API = {
   },
   getExamples: function() {
     return $.ajax({
-      url: "api/examples",
+      url: "http://api-public.guidebox.com/v2/shows",
       type: "GET"
     });
   },
