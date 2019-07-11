@@ -16,7 +16,8 @@ var API = {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "api/examples",
+      // url: "api/examples",
+      url: "http://api-public.guidebox.com/v2/",
       data: JSON.stringify(example)
     });
   },
