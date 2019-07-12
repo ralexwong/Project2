@@ -7,7 +7,6 @@ var $submitBtn = $("#submit");
 var $exampleList = $("#example-list");
 
 
-
 // The API object contains methods for each kind of request we'll make
 var API = {
   saveExample: function(example) {
@@ -16,14 +15,13 @@ var API = {
         "Content-Type": "application/json"
       },
       type: "POST",
-      // url: "api/examples",
       url: "http://api-public.guidebox.com/v2/",
       data: JSON.stringify(example)
     });
   },
   getExamples: function() {
     return $.ajax({
-      url: "http://api-public.guidebox.com/v2/shows",
+      url: "https://api-public.guidebox.com/v2/movies/157872?api_key=eebe5906010bcf88573d887c308bd62a53db60ca",
       type: "GET"
     });
   },
@@ -102,3 +100,5 @@ var handleDeleteBtnClick = function() {
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
 $exampleList.on("click", ".delete", handleDeleteBtnClick);
+
+console.log(API.getExamples());

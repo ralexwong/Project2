@@ -47,12 +47,5 @@ db.sequelize.sync(syncOptions).then(function() {
   });
 });
 
-// Guidebox.movies.list()
-// .then(function (res) {
-//   console.log(res.results[1]);
-// })
-// .catch(function (e) {
-//   console.log(e);
-// });
-
 module.exports = app;
+module.exports = Guidebox;
