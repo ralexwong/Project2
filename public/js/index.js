@@ -13,7 +13,7 @@ var API = {
       },
       type: "POST",
       url: "api/examples",
-      data: JSON.stringify(example)
+      data: JSON.stringify(dataType)
     });
   },
   getExamples: function() {
