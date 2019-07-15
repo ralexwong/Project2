@@ -1,6 +1,7 @@
 console.log("running");
 
 var db = require("../models");
+
 // require("dotenv").config();
 // var keys = require("..//keys");
 
@@ -32,6 +33,19 @@ var Guidebox = require("guidebox")("eebe5906010bcf88573d887c308bd62a53db60ca");
 //   });
 
 module.exports = function(app) {
+  app.get("/api/query", function(req, res) {
+
+    console.log("search: " + req);
+    Guidebox.search.
+      movies({ query: req.body })
+      .then(function(res) {
+
+      })
+    .catch(function(e) {
+      console.log(e);
+    });
+  });
+
   // Get all examples
   app.get("/api/examples", function(req, res) {
     db.Example.findAll({}).then(function(dbExamples) {
@@ -40,10 +54,10 @@ module.exports = function(app) {
   });
 
   // Create a new example
-  app.post("/api/examples", function(req, res) {
-    db.Example.create(req.body).then(function(dbExample) {
-      res.json(dbExample);
-    });
+  app.post("/api/:query", function(req, res) {
+
+    var query = req.params.query;
+
   });
 
   // Delete an example by id
@@ -53,3 +67,4 @@ module.exports = function(app) {
     });
   });
 };
+
