@@ -1,37 +1,51 @@
 console.log("running");
 
 var db = require("../models");
+
 // require("dotenv").config();
 // var keys = require("..//keys");
 
 //I need to get the hide file to work for the API, so until then we need to enter it and pull it out before pushing the code to GitHub
-var Guidebox = require("guidebox")("APIKEY");
+var Guidebox = require("guidebox")("eebe5906010bcf88573d887c308bd62a53db60ca");
 
 //Only pulls the top 10 movies, you can change the limit to show more
-Guidebox.movies
-  .list({ limit: 10 })
-  .then(function(res) {
-    var jsonData = res;
-    // console.log(jsonData.results[0].title);
-    for (var i = 0; i < jsonData.results.length; i++) {
-      console.log(
-        "\nTitle: " +
-          jsonData.results[i].title +
-          "\nYear Released: " +
-          jsonData.results[i].release_year +
-          ", " +
-          "\nRating: " +
-          jsonData.results[i].rating +
-          "\nImage: " +
-          jsonData.results[i].poster_120x171
-      );
-    }
-  })
-  .catch(function(e) {
-    console.log(e);
-  });
+// Guidebox.movies
+//   .list({ limit: 10 })
+//   .then(function(res) {
+//     var jsonData = res;
+//     console.log(jsonData.results[0].title);
+//     for (var i = 0; i < jsonData.results.length; i++) {
+//       console.log(
+//         "\nTitle: " +
+//           jsonData.results[i].title +
+//           "\nYear Released: " +
+//           jsonData.results[i].release_year +
+//           "\nRating: " +
+//           jsonData.results[i].rating +
+//           "\nImage: " +
+//           jsonData.results[i].poster_120x171
+//       );
+//     }
+//     console.log(res);
+//   })
+//   .catch(function(e) {
+//     console.log(e);
+//   });
 
 module.exports = function(app) {
+  app.get("/api/query", function(req, res) {
+
+    console.log("search: " + req);
+    Guidebox.search.
+      movies({ query: req.body })
+      .then(function(res) {
+
+      })
+    .catch(function(e) {
+      console.log(e);
+    });
+  });
+
   // Get all examples
   app.get("/api/examples", function(req, res) {
     db.Example.findAll({}).then(function(dbExamples) {
@@ -40,10 +54,10 @@ module.exports = function(app) {
   });
 
   // Create a new example
-  app.post("/api/examples", function(req, res) {
-    db.Example.create(req.body).then(function(dbExample) {
-      res.json(dbExample);
-    });
+  app.post("/api/:query", function(req, res) {
+
+    var query = req.params.query;
+
   });
 
   // Delete an example by id
@@ -53,3 +67,4 @@ module.exports = function(app) {
     });
   });
 };
+

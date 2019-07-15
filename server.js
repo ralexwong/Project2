@@ -2,6 +2,9 @@ require("dotenv").config();
 var express = require("express");
 var exphbs = require("express-handlebars");
 
+// guidebox
+var Guidebox = require("guidebox")("eebe5906010bcf88573d887c308bd62a53db60ca");
+
 var db = require("./models");
 
 var app = express();
@@ -45,3 +48,4 @@ db.sequelize.sync(syncOptions).then(function() {
 });
 
 module.exports = app;
+module.exports = Guidebox;

@@ -1,8 +1,11 @@
+// http://api-public.guidebox.com/v2/{endpoint}  <---- BASE API URL
+
 // Get references to page elements
 var $exampleText = $("#example-text");
 var $exampleDescription = $("#example-description");
 var $submitBtn = $("#submit");
 var $exampleList = $("#example-list");
+
 
 // The API object contains methods for each kind of request we'll make
 var API = {
@@ -12,15 +15,15 @@ var API = {
         "Content-Type": "application/json"
       },
       type: "POST",
-      // url: "api/examples",
       url: "http://api-public.guidebox.com/v2/",
       data: JSON.stringify(example)
     });
   },
   getExamples: function() {
     return $.ajax({
-      url: "api/examples",
-      type: "GET"
+      url: "",
+      type: "GET",
+      dataType: "json"
     });
   },
   deleteExample: function(id) {
@@ -32,55 +35,74 @@ var API = {
 };
 
 // refreshExamples gets new examples from the db and repopulates the list
-var refreshExamples = function() {
-  API.getExamples().then(function(data) {
-    var $examples = data.map(function(example) {
-      var $a = $("<a>")
-        .text(example.text)
-        .attr("href", "/example/" + example.id);
+// var refreshExamples = function() {
+//   API.getExamples().then(function(data) {
+//     var $examples = data.map(function(example) {
+//       var $a = $("<a>")
+//         .text(example.text)
+//         .attr("href", "/example/" + example.id);
 
-      var $li = $("<li>")
-        .attr({
-          class: "list-group-item",
-          "data-id": example.id
-        })
-        .append($a);
+//       var $li = $("<li>")
+//         .attr({
+//           class: "list-group-item",
+//           "data-id": example.id
+//         })
+//         .append($a);
 
-      var $button = $("<button>")
-        .addClass("btn btn-danger float-right delete")
-        .text("ｘ");
+//       var $button = $("<button>")
+//         .addClass("btn btn-danger float-right delete")
+//         .text("ｘ");
 
-      $li.append($button);
+//       $li.append($button);
 
-      return $li;
-    });
+//       return $li;
+//     });
 
-    $exampleList.empty();
-    $exampleList.append($examples);
-  });
-};
+//     $exampleList.empty();
+//     $exampleList.append($examples);
+//   });
+// };
 
 // handleFormSubmit is called whenever we submit a new example
 // Save the new example to the db and refresh the list
 var handleFormSubmit = function(event) {
   event.preventDefault();
 
-  var example = {
-    text: $exampleText.val().trim(),
-    description: $exampleDescription.val().trim()
-  };
+  var query = $("#example-text").val().trim();
 
-  if (!(example.text && example.description)) {
-    alert("You must enter an example text and description!");
-    return;
-  }
+  console.log(query);
 
-  API.saveExample(example).then(function() {
-    refreshExamples();
-  });
+  $.ajax("http://api-public.guidebox.com/v2/search?api_key=eebe5906010bcf88573d887c308bd62a53db60ca&type=movie&field=title&query=" + query, {
+    data: query,
+    type: "GET"
+  }).then(function(res) {
+    console.log(res.results);
+    var movieID = res.results[0].id;
+    console.log(movieID);
 
-  $exampleText.val("");
-  $exampleDescription.val("");
+    for (var i = 0; i < res.results.length; i++) {
+      var img = res.results[i].poster_400x570;
+      var id = res.results[i].id;
+
+      var div = $("<div class='movieList'>");
+      var imgDiv = $("<img src='" + img + "'>");
+      imgDiv.attr("movieID", id);
+      div.append(imgDiv);
+      
+    }
+
+    $.ajax("https://api-public.guidebox.com/v2/movies/" + movieID + "?api_key=eebe5906010bcf88573d887c308bd62a53db60ca", {
+      data: query,
+      type: "GET"
+    }).then(function(res) {
+      console.log(res);
+    })
+  })
+
+  // API.saveExample(example).then(function() {
+  //   refreshExamples();
+  // });
+
 };
 
 // handleDeleteBtnClick is called when an example's delete button is clicked
@@ -98,3 +120,22 @@ var handleDeleteBtnClick = function() {
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
 $exampleList.on("click", ".delete", handleDeleteBtnClick);
+
+
+// $("#example-text").on("submit", function(event) {
+//   event.preventDefault();
+
+//   var query = $("#example-text").val().trim();
+
+//   console.log(query);
+
+//   $.ajax({
+//     url: "/api/query",
+//     data: query,
+//     type: "GET",
+//     dataType: "json"
+//   });
+
+// });
+
+
