@@ -44,7 +44,8 @@ var handleFormSubmit = function(event) {
       // })
     })
   } 
-  if($("#tvInput").val()) {
+
+  else if ($("#tvInput").val()) {
 
     // capture the users query
     var query = $("#tvInput").val().trim();
@@ -81,11 +82,24 @@ $(document).on("click",".tvList", function() {
   var tvID = $(this).attr("tvid");
 
   // start the other API when the user clicks on the movie image
-  $.ajax("https://api-public.guidebox.com/v2/movies/" + tvID + "?api_key=eebe5906010bcf88573d887c308bd62a53db60ca", {
+  $.ajax("https://api-public.guidebox.com/v1.43/all/eebe5906010bcf88573d887c308bd62a53db60ca/show/" + tvID + "/available_content", {
     data: tvID,
     type: "GET"
   }).then(function(res) {
     console.log(res);
+
+    console.log(res.results.web.episodes.all_sources);
+
+    for (var i = 0; i < res.results.web.episodes.all_sources.length; i++) {
+      if (res.results.web.episodes.all_sources[i].type === "subscription") {
+        
+        var subscription = res.results.web.episodes.all_sources[i].display_name;
+        console.log(this);
+
+        $(this).attr("subcription", subscription);
+
+      }
+    }
 
     // append all the relavant json data to the div to send to the next page
 
