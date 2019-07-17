@@ -1,23 +1,49 @@
 
 <div id="home" style="height: 1000px; width 100px">
-  <div class="container">
+
     <div class="row">
-      <div class="col-8 offset-2">
-        <h1>{{msg}}</h1>
-        <h2><strong>AAAShow</strong></h2>
-      {{> header }}
-       
-        
+      <div class="col-12">
+      {{> header }} 
       </div>
-      
+       <h2>Sign Up</h2>
+        <form class="signup">
+            <div class="form-group">
+                <label for="exampleInputfirstName">first Name</label>
+                <input type="text" class="form-control" id="firstName-input" placeholder="FirstName">
+              </div>
+              <div class="form-group">
+                  <label for="exampleInputlastName">last Name</label>
+                  <input type="text" class="form-control" id="lastName-input" placeholder="lastName">
+                </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="email-input" placeholder="Email">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="password-input" placeholder="Password">
+          </div>
+          <div style="display: none" id="alert" class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span> <span class="msg"></span>
+          </div>
+          <button type="submit" class="btn btn-default">Sign Up</button>
+        </form>
+        <br />
+        <p>Or log in <a href="../public/login.html">here</a></p>
+      </div>
     </div>
    
-  </div>
+  
 </div>
  {{>footer}}
-
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/lumen/bootstrap.min.css">
+  <link href="../public/styles/styles2.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript" src="../public/js/login.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/index.js"></script>
+{{!-- <script src="/js/index.js"></script> --}}
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
     <script>
         $(document).ready(function (){
@@ -27,4 +53,4 @@
                 }, 2000);
             });
         });
-    </script>
+    </script> 
