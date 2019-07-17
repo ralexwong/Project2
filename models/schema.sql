@@ -13,12 +13,14 @@ CREATE TABLE 'shows' (
     PRIMARY KEY ('show_id')
 );
 
-CREATE TABLE 'moives' (
+CREATE TABLE 'movies' (
     'movie_id' INT NOT NULL AUTO_INCREMENT,
+    'title' VARCHAR(100) NOT NULL,
     'year' INT(4) NOT NULL,
     'genre' VARCHAR(100) NOT NULL,
-    'guideboxURL' VARCHAR(300),
-    PRIMARY KEY ('moive_id')
+    'guidebox_url' VARCHAR(300),
+    'image_url' VARCHAR(300),
+    PRIMARY KEY ('movie_id')
 );
 
 CREATE TABLE 'userInfo' (
