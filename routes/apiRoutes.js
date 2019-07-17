@@ -54,9 +54,13 @@ module.exports = function(app) {
   });
 
   // Create a new example
-  app.post("/api/:query", function(req, res) {
 
-    var query = req.params.query;
+  // will have to call the api's twice
+  // when they click on the image/link it will initilize the api on the backend
+  // 
+  app.get("/api/:id", function(req, res) {
+
+    var id = req.params.id;
 
   });
 

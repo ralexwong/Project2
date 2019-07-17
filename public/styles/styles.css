@@ -1,3 +1,64 @@
 .list-group-item {
   line-height: 2.5;
 }
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color:rgb(48, 121, 139);
+
+  position: sticky;
+  top: 0;
+  font-size:25px;
+}
+
+.active{
+  background-color: rgb(74, 19, 204);
+}
+li a:hover {
+  background-color: rgb(48, 62, 139);
+}
+
+li a {
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  
+}
+
+li {
+  float: left;
+  border-right:6px groove red;
+}
+body{
+  background-image: url('https://png.pngtree.com/thumb_back/fh260/back_pic/00/01/54/555604115c64ab3.jpg');
+
+}
+#aman{
+  background-color:green;
+}
+h1{
+  color:brown;
+}
+h2{
+  color:green;
+}
+#favorites{
+  color:rgb(38, 184, 123);
+}
+#searchtext{
+  color:rgb(41, 187, 36);
+}
+footer{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color:rgb(28, 204, 195);
+  color: white;
+  text-align: center;
+}

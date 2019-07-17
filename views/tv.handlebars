@@ -1,0 +1,32 @@
+<div id="tv" style="height: 1000px; width 100px">
+  <div class="row">
+    <div class="col-8 offset-2">
+      <h1>{{msg}}</h1>
+      <h2><strong>tvShow</strong></h2>
+      {{> header }}
+      <form class="clearfix mb-4" action="POST">
+        <div class="form-group">
+          <label for="example-text" id="searchtext"><strong>SEARCH FOR A TV SHOW</strong></label>
+          <input type="text" id="tvInput" class="form-control" aria-describedby="example-text" placeholder=" TV SHOW OR MOVIE">
+        </div>
+        
+        <button id="submit" class="btn btn-primary float-right"><strong>Search</strong></button>
+      </form>
+      
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+<script>
+  $(document).ready(function (){
+    $("#click").click(function (){
+      $('html, body').animate({
+        scrollTop: $("#movie").offset().top
+      }, 2000);
+    });
+  });
+</script>
+</div>

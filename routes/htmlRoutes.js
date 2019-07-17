@@ -1,33 +1,41 @@
 var db = require("../models");
 
 module.exports = function(app) {
-  // Load index page
+  // Load home page
   app.get("/", function(req, res) {
     db.Example.findAll({}).then(function(dbExamples) {
-      res.render("index", {
+      res.render("home", {
         msg: "Welcome!",
         examples: dbExamples
       });
     });
   });
-
-  // Load example page and pass in an example by id
-  app.get("/example/:id", function(req, res) {
-    db.Example.findOne({ where: { id: req.params.id } }).then(function(dbExample) {
-      res.render("example", {
-        example: dbExample
+  app.get("/movie", function(req, res) {
+    res.render("movie", {
+      msg: "Welcome!"
+    });
+  });
+  app.get("/movie/:id", function(req, res) {
+    res.render("info", {
+      msg: "Welcome!"
+    });
+  });
+  app.get("/tv", function(req, res) {
+    db.Example.findAll({}).then(function(dbExamples) {
+      res.render("tv", {
+        msg: "Welcome!",
+        examples: dbExamples
       });
     });
   });
-
-  app.get("/login", function(req, res) {
-    res.render("login");
+  app.get("/favorite", function(req, res) {
+    db.Example.findAll({}).then(function(dbExamples) {
+      res.render("favorite", {
+        msg: "Welcome!",
+        examples: dbExamples
+      });
+    });
   });
-
-  app.get("/favorites", function(req, res) {
-    res.render("favorites");
-  });
-
   // Render 404 page for any unmatched routes
   app.get("*", function(req, res) {
     res.render("404");
