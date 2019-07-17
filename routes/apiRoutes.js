@@ -1,6 +1,7 @@
 console.log("running");
 
 var db = require("../models");
+var axios = require("axios");
 
 // require("dotenv").config();
 // var keys = require("..//keys");
@@ -53,7 +54,48 @@ module.exports = function(app) {
     });
   });
 
-  // Create a new example
+  app.get("/api/movie", function(req, res) { //movie?query=xxxx
+
+    var query = req.query.q;
+
+    // call first API to grab the ID of the movie
+    var url = 'https://api-public.guidebox.com/v2/search?api_key=eebe5906010bcf88573d887c308bd62a53db60ca&type=movie&field=title&query=' + query;
+    
+    axios.get(url, {
+      type: "GET"
+    }).then(function(resMovie) {
+      var movie = resMovie.data.results;      
+      console.log(movie);
+
+      var movieArray = [];
+      for (var i = 0; i < 5; i++) {
+        movieArray.push(movie[i])
+      }
+      console.log(movieArray);
+      res.json(movieArray);
+    })
+  });
+
+  app.get("/api/tv", function(req, res) {
+
+    var query = req.query.q;
+
+    var url = "https://api-public.guidebox.com/v2/search?api_key=eebe5906010bcf88573d887c308bd62a53db60ca&type=show&field=title&query=" + query;
+    // call first API to grab the ID of the movie
+    axios.get(url, {
+      type: "GET"
+    }).then(function(resTv) {
+      var tv = resTv.data.results
+      console.log(tv);
+
+      var tvArray = [];
+      for (var i = 0; i < 5; i++) {
+        tvArray.push(tv[i])
+      }
+      res.json(tvArray);
+    });
+  });
+
 
   // will have to call the api's twice
   // when they click on the image/link it will initilize the api on the backend

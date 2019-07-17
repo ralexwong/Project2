@@ -20,6 +20,11 @@ module.exports = function(app) {
       msg: "Welcome!"
     });
   });
+  app.post("/movie/:id", function(req, res) {
+    res.render("info", {
+      msg: "Welcome!"
+    });
+  });
   app.get("/tv", function(req, res) {
     db.Example.findAll({}).then(function(dbExamples) {
       res.render("tv", {
