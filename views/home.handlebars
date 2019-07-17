@@ -1,0 +1,30 @@
+
+<div id="home" style="height: 1000px; width 100px">
+  <div class="container">
+    <div class="row">
+      <div class="col-8 offset-2">
+        <h1>{{msg}}</h1>
+        <h2><strong>AAAShow</strong></h2>
+      {{> header }}
+       
+        
+      </div>
+      
+    </div>
+   
+  </div>
+</div>
+ {{>footer}}
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function (){
+            $("#click").click(function (){
+                $('html, body').animate({
+                    scrollTop: $("#home").offset().top
+                }, 2000);
+            });
+        });
+    </script>
