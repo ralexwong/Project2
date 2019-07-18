@@ -1,7 +1,6 @@
 // http://api-public.guidebox.com/v2/{endpoint}  <---- BASE API URL
 
 // handleFormSubmit is called whenever we submit a new example
-// Save the new example to the db and refresh the list
 var handleFormSubmit = function(event) {
   event.preventDefault();
 
@@ -156,5 +155,4 @@ $(document).on("click","#infoRouteLink", function() {
 
 // Add event listeners to the submit and delete buttons
 $("#submit").on("click", handleFormSubmit);
-
 

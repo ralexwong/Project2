@@ -15,13 +15,16 @@ CREATE TABLE shows (
     PRIMARY KEY ('show_id')
 );
 
+
 CREATE TABLE movies (
     id INT NOT NULL AUTO_INCREMENT,
     movie_id INT NOT NULL,
     subscription VARCHAR(50),
     year INT(4) NOT NULL,
+
     'genre' VARCHAR(100) NOT NULL,
-    'guideboxURL' VARCHAR(300),
+    'guidebox_url' VARCHAR(300),
+    'image_url' VARCHAR(300)
     PRIMARY KEY ('movie_id')
 );
 
