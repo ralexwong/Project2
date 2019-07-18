@@ -1,23 +1,19 @@
 
 <div id="home" style="height: 1000px; width 100px">
-  <div class="container">
+
     <div class="row">
-      <div class="col-8 offset-2">
-        <h1>{{msg}}</h1>
-        <h2><strong>AAAShow</strong></h2>
-      {{> header }}
-       
-        
-      </div>
-      
-    </div>
-   
-  </div>
+      <div class="col-12">
+      {{> header }} 
+     
+     </div>
+  
 </div>
  {{>footer}}
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/lumen/bootstrap.min.css">
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/index.js"></script>
+{{!-- <script src="/js/index.js"></script> --}}
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
     <script>
         $(document).ready(function (){
@@ -27,4 +23,4 @@
                 }, 2000);
             });
         });
-    </script>
+    </script> 
