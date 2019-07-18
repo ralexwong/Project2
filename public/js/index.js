@@ -57,7 +57,7 @@ var handleFormSubmit = function(event) {
         div.attr("tvID", id);                // might push the tvID attribute to the image in the future
         div.append(imgDiv)                   // so more info can be added such as ratings without having the whole div be a link
 
-        $("#tv").append(div);
+        $("#tvRow").append(div);
       }
     })
     
@@ -70,12 +70,38 @@ $(document).on("click",".tvList", function() {
   var tvId = $(this).attr("tvid");
   console.log(tvId);
 
+  $("#selectedTv").html(this);
+
+  $("#tvRow").html('');
+
   // start the other API when the user clicks on the movie image
   $.ajax("/api/tvTwo?q=" + tvId, {
     data: tvId,
     type: "GET"
-  }).then(function(res) {
+  }).then(function(data) {
 
+    console.log(data);
+
+    var subscription = "";
+    console.log(data.web.episodes.all_sources);
+
+    for (var i = 0; i < data.web.episodes.all_sources.length; i++) {
+      if (data.web.episodes.all_sources[i].type === "subscription") {
+        
+        subscription = data.web.episodes.all_sources[i].display_name;
+      }
+    }
+    console.log(subscription);
+
+    if (subscription.length > 0) {
+      $("#subscription").html("Found on: " + subscription + "!");
+    }
+    else {
+      $("#subscription").html("Is not found on any subscription website in our database.");
+    }
+
+    var infoLink = $("<a tvid='" + id + "' href='/info/' id='tvInfoLink'>More info about the info</a>");
+    $("#tvLinks").append(infoLink);
 
   })
 });
@@ -97,13 +123,15 @@ $(document).on("click",".movieList", function() {
     console.log(data);
     var id = data.id;
 
+    // put everything in mysql table. have the api call it by its id somehow. use other files as reference
+
     if (data.subscription_web_sources.length > 0) {
       $("#subscription").html("Found on: " + data.subscription_web_sources[0].display_name + "!");
 
       var link = $("<a id='link' href='" + data.subscription_web_sources[0].link + "'>Click here for the link</a>");
       $("#movieLinks").append(link);
 
-      var infoLink = $("<a movieid='" + id + "' infoRouteLink' href='/info/" + id + "'>More info about the movie</a>");
+      var infoLink = $("<a movieid='" + id + "' href='/info/' id='movieInfoLink'>More info about the movie</a>");
       $("#movieLinks").append(infoLink);
     }
     else {
@@ -146,7 +174,7 @@ $(document).on("click","#infoRouteLink", function() {
   console.log(this);
   var id = this.movieid;
 
-  $.ajax("/api/info/" + id, {
+  $.ajax("/api/info?q=" + id, {
     data: id,
     type: "GET"
   })
