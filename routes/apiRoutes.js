@@ -34,25 +34,6 @@ var Guidebox = require("guidebox")("eebe5906010bcf88573d887c308bd62a53db60ca");
 //   });
 
 module.exports = function(app) {
-  app.get("/api/query", function(req, res) {
-
-    console.log("search: " + req);
-    Guidebox.search.
-      movies({ query: req.body })
-      .then(function(res) {
-
-      })
-    .catch(function(e) {
-      console.log(e);
-    });
-  });
-
-  // Get all examples
-  app.get("/api/examples", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
-      res.json(dbExamples);
-    });
-  });
 
   app.get("/api/movie", function(req, res) { //movie?query=xxxx
 
@@ -65,15 +46,53 @@ module.exports = function(app) {
       type: "GET"
     }).then(function(resMovie) {
       var movie = resMovie.data.results;      
-      console.log(movie);
+      // console.log(movie);
 
       var movieArray = [];
       for (var i = 0; i < 5; i++) {
         movieArray.push(movie[i])
       }
-      console.log(movieArray);
+      // console.log(movieArray);
       res.json(movieArray);
     })
+  });
+
+  // will have to call the api's twice
+  // when they click on the image/link it will initilize the api on the backend
+  // 
+  app.get("/api/movieTwo", function(req, res) {
+
+    var movieId = req.query.q;
+
+    console.log(movieId);
+
+    // start the other API when the user clicks on the movie image
+    axios.get("https://api-public.guidebox.com/v2/movies/" + movieId + "?api_key=eebe5906010bcf88573d887c308bd62a53db60ca", {
+      data: movieId,
+      type: "GET"
+    }).then(function(resMovie) {
+
+      var data = resMovie.data
+      console.log(data);
+      res.json(data);
+
+      var id = data.id;
+      var director = data.directors[0].name;
+      var length = (data.duration * 60) + " minutes";
+      var metacritic = data.metacritic;
+      var overview = data.overview;
+      var poster = data.poster_400x570;
+      var rating = data.rating;
+      var subcription = data.subscription_web_sources[0].display_name;
+      var subcriptionLink = data.subscription_web_sources[0].link;
+      var title = data.title;
+      var trailer = data.trailers.web[0].link;
+      
+      var cast = [];
+      var genres = [];
+
+    })
+
   });
 
   app.get("/api/tv", function(req, res) {
@@ -96,18 +115,35 @@ module.exports = function(app) {
     });
   });
 
+  app.get("/api/tvTwo/", function(req, res) {
 
-  // will have to call the api's twice
-  // when they click on the image/link it will initilize the api on the backend
-  // 
-  app.get("/api/:id", function(req, res) {
+    var tvId = req.query.q;
 
-    var id = req.params.id;
+    console.log(tvId);
 
-  });
+    axios.get("https://api-public.guidebox.com/v1.43/all/eebe5906010bcf88573d887c308bd62a53db60ca/show/" + tvId + "/available_content", {
+      data: tvId,
+      type: "GET"
+    }).then(function(resTv) {
+      console.log(resTv);
+      var data = resTv.results
+      var subcription = "";
+      console.log(data.web.episodes.all_sources);
+  
+      for (var i = 0; i < data.web.episodes.all_sources.length; i++) {
+        if (data.web.episodes.all_sources[i].type === "subscription") {
+          
+          subscription = data.web.episodes.all_sources[i].display_name;
+        }
+      }
+      console.log(subscription);
+
+      
+    })
+  })
 
   // Delete an example by id
-  app.delete("/api/examples/:id", function(req, res) {
+  app.get("/api/movie/:id", function(req, res) {
     db.Example.destroy({ where: { id: req.params.id } }).then(function(dbExample) {
       res.json(dbExample);
     });
