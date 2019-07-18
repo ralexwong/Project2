@@ -94,6 +94,12 @@ $(document).on("click",".movieList", function() {
 
     console.log(data);
 
+    if (data.subscription_web_sources[0].display_name) {
+      $("#subsciptionText").html(data.subscription_web_sources[0].display_name);
+    }
+    else {
+      $("#subsciptionText").html("Is not found on any subscription website in our database.");
+    }
     
   })
 
