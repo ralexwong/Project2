@@ -1,44 +1,54 @@
 var db = require("../models");
 
 module.exports = function(app) {
-  // Load home page
+  // home page
   app.get("/", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
-      res.render("home", {
-        msg: "Welcome!",
-        examples: dbExamples
-      });
+    res.render("home", {
+      msg: "Welcome!",
     });
   });
+
+  // movie routes
   app.get("/movie", function(req, res) {
     res.render("movie", {
       msg: "Welcome!"
     });
   });
-  app.get("/movie/:id", function(req, res) {
+
+  app.post("/movie", function(req, res) {
+    res.render("movie", {
+      msg: "Welcome!"
+    });
+  });
+
+  // info routes
+  app.get("/info/:id", function(req, res) {
     res.render("info", {
       msg: "Welcome!"
     });
   });
-  app.post("/movie/:id", function(req, res) {
-    res.render("info", {
-      msg: "Welcome!"
-    });
-  });
+
+  // tv routes
   app.get("/tv", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
       res.render("tv", {
         msg: "Welcome!",
-        examples: dbExamples
-      });
     });
   });
+
+  // favorite routes
   app.get("/favorite", function(req, res) {
     db.Example.findAll({}).then(function(dbExamples) {
       res.render("favorite", {
         msg: "Welcome!",
         examples: dbExamples
       });
+    });
+  });
+
+  // channel routes
+  app.get("/channel", function(req, res) {
+    res.render("channel", {
+      msg: "Welcome!",
     });
   });
   // Render 404 page for any unmatched routes

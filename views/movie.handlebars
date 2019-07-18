@@ -1,4 +1,4 @@
-<div id="movie" style="height: 1000px; width 100px">
+<div id="movie">
   <div class="row">
     <div class="col-12 ">
       
@@ -6,26 +6,30 @@
       
         <form class="clearfix mb-4" action="POST">
         <div class="form-group">
-          <label for="example-text" id="searchtext"><strong>SEARCH FOR TV SHOW OR MOVIE </strong></label>
-          <input type="text" id="example-text" class="form-control" aria-describedby="example-text" placeholder=" TV SHOW OR MOVIE">
+          <label for="example-text" id="searchtext"><strong>SEARCH FOR A MOVIE </strong></label>
+          <input type="text" id="movieInput" class="form-control" aria-describedby="example-text" placeholder=" TV SHOW OR MOVIE">
         </div>
         
         <button id="submit" class="btn btn-primary float-right"><strong>Search</strong></button>
       </form>
     </div>
-  <div>
+  </div>
   
   <div id="movieRow" class="row">
 
   </div>
 
-  <div class="row">
+  <div id="movieInfo" class="row">
     <div id="selectedMovie" class="column">
 
     </div>
 
-    <div id="movieInfo" class="column">
+    <div id="movieLinks" class="column">
+      <p id="subscription">
 
+      </p>
+      
+    </div>
   </div>
 </div>
       
@@ -34,15 +38,14 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/index.js"></script>
 <link rel="stylesheet" href="/public/styles/styles.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function (){
-            $("#click").click(function (){
-                $('html, body').animate({
-                    scrollTop: $("#movie").offset().top
-                }, 2000);
-            });
-        });
-    </script>
-</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+<script>
+  $(document).ready(function (){
+    $("#click").click(function (){
+      $('html, body').animate({
+        scrollTop: $("#movie").offset().top
+      }, 2000);
+    });
+  });
+</script>
 
