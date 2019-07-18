@@ -19,6 +19,10 @@ footer{
   bottom: 0;
 }
 
+.navbar-light .navbar-nav .nav-link {
+  color:white;
+}
+
 
 
 /* .list-group-item {

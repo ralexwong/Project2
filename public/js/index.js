@@ -1,5 +1,12 @@
-
 // http://api-public.guidebox.com/v2/{endpoint}  <---- BASE API URL
+
+// handleFormSubmit is called whenever we submit a new example
+var handleFormSubmit = function(event) {
+  event.preventDefault();
+
+  $("#movieRow").html('');
+  $("#selectedMovie").html('');
+  $("#subscription").html('');
 
   if ($("#movieInput").val()) {
 
@@ -88,12 +95,19 @@ $(document).on("click",".movieList", function() {
   }).then(function(data) {
 
     console.log(data);
+    var id = data.id;
 
-    if (data.subscription_web_sources[0].display_name) {
-      $("#subsciptionText").html(data.subscription_web_sources[0].display_name);
+    if (data.subscription_web_sources.length > 0) {
+      $("#subscription").html("Found on: " + data.subscription_web_sources[0].display_name + "!");
+
+      var link = $("<a id='link' href='" + data.subscription_web_sources[0].link + "'>Click here for the link</a>");
+      $("#movieLinks").append(link);
+
+      var infoLink = $("<a movieid='" + id + "' infoRouteLink' href='/info/" + id + "'>More info about the movie</a>");
+      $("#movieLinks").append(infoLink);
     }
     else {
-      $("#subsciptionText").html("Is not found on any subscription website in our database.");
+      $("#subscription").html("Is not found on any subscription website in our database.");
     }
     
   })
@@ -125,6 +139,18 @@ $(document).on("click",".movieList", function() {
   //   // append all the relavant json data to the div to send to the next page
 
   // })
+});
+
+$(document).on("click","#infoRouteLink", function() {
+  
+  console.log(this);
+  var id = this.movieid;
+
+  $.ajax("/api/info/" + id, {
+    data: id,
+    type: "GET"
+  })
+
 });
 
 // Add event listeners to the submit and delete buttons

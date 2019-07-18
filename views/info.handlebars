@@ -1,18 +1,19 @@
-<div id="movie" style="height: 1000px; width 100px">
+<div id="movie">
   <div class="row">
-  <div class="col-8 offset-2">
-    <h1>{{msg}}</h1>
-    <h2><strong>movieShow</strong></h2>
-    {{> header }}
-    
-      <form class="clearfix mb-4" action="POST">
-        <div class="form-group">
-          <label for="example-text" id="searchtext"><strong>SEARCH FOR A MOVIE </strong></label>
-          <input type="text" id="movieInput" class="form-control" aria-describedby="example-text" placeholder=" TV SHOW OR MOVIE">
+    <div class="col-12">
+        {{> header }}
+        
+        <div>
+            <img src="{{> img }}">
         </div>
         
-        <button id="submit" class="btn btn-primary float-right"><strong>Search</strong></button>
-      </form>
+
+        <div id="info">
+            
+        </div>
+
+
+    </div>
   </div>
 </div>
 
