@@ -3,10 +3,10 @@ var db = require("../models");
 module.exports = function(app) {
   // Load home page
   app.get("/", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
+    db.topMovieData.findAll({}).then(function(dbExamples) {
       res.render("home", {
         msg: "Welcome!",
-        examples: dbExamples
+        // examples: dbExamples
       });
     });
   });
@@ -24,7 +24,7 @@ module.exports = function(app) {
     db.Example.findAll({}).then(function(dbExamples) {
       res.render("tv", {
         msg: "Welcome!",
-        examples: dbExamples
+        examples: data
       });
     });
   });
@@ -33,6 +33,14 @@ module.exports = function(app) {
       res.render("favorite", {
         msg: "Welcome!",
         examples: dbExamples
+      });
+    });
+  });
+  app.get("/topMovieData", function(req, res) {
+    db.topMovieData.findAll({}).then(function(topMovieData) {
+      res.render("home", {
+        msg: "Welcome!",
+        examples: topMovieData
       });
     });
   });

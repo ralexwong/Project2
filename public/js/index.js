@@ -1,4 +1,7 @@
 
+
+
+
 // http://api-public.guidebox.com/v2/{endpoint}  <---- BASE API URL
 
 //       var $button = $("<button>")

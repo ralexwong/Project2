@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "root",
-    "password": "poop",
-    "database": "movieDB",
+    "password": "Kmg*365_hate",
+    "database": "testmoviedb",
     "host": "localhost",
     "dialect": "mysql"
   },

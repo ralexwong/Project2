@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 console.log("running");
 
 var db = require("../models");
@@ -9,134 +10,103 @@ var db = require("../models");
 var Guidebox = require("guidebox")("eebe5906010bcf88573d887c308bd62a53db60ca");
 
 
-//Only pulls the top 10 movies, you can change the limit to show more
+// //Only pulls the top 10 movies, you can change the limit to show more
 // Guidebox.movies
 //   .list({ limit: 10 })
 //   .then(function(res) {
-//     var jsonData = res;
-//     console.log(jsonData.results[0].title);
-//     for (var i = 0; i < jsonData.results.length; i++) {
+//     // console.log(res.results[0]);
+//     for (var i = 0; i < res.results.length; i++) {
 //       console.log(
-//         "\nTitle: " +
-//           jsonData.results[i].title +
+//         "\nAPI_ID: " +
+//           res.results[i].id +
+//           "\nTitle: " +
+//           res.results[i].title +
 //           "\nYear Released: " +
-//           jsonData.results[i].release_year +
+//           res.results[i].release_year +
 //           "\nRating: " +
-//           jsonData.results[i].rating +
+//           res.results[i].rating +
 //           "\nImage: " +
-//           jsonData.results[i].poster_120x171
+//           res.results[i].poster_120x171
 //       );
 //     }
-//     console.log(res);
+//     // console.log(res);
 //   })
 //   .catch(function(e) {
 //     console.log(e);
 //   });
 
-//Only pulls the top 10 movies, you can change the limit to show more
-// Guidebox.movies
-//   .list({ limit: 10 })
-//   .then(function(res) {
-//     var jsonData = res;
-//     // console.log(jsonData);
-//     for (var i = 0; i < jsonData.results.length; i++) {
-//       console.log(
-//         "\nApiID: " +
-//           jsonData.results[i].id +
-//         "\nTitle: " +
-//           jsonData.results[i].title +
-//           "\nYear Released: " +
-//           jsonData.results[i].release_year +
-//           ", " +
-//           "\nRating: " +
-//           jsonData.results[i].rating +
-//           "\nImage: " +
-//           jsonData.results[i].poster_120x171
-//       );
-//     }
-//   })
-//   .catch(function(e) {
-//     console.log(e);
-//   });
-
-
-
-
-        // var moiveId = jsonData.results[i].id;
-      // moiveTitle = jsonData.results[i].title;
-      // console.log("1st set: " + moiveTitle);
-      // var movieReleaseDate = jsonData.results[i].release_year;
-      // var movieRating = jsonData.results[i].rating;
-      // var moivePoster = jsonData.results[i].poster_120x171;
-
+// var moiveId = jsonData.results[i].id;
+// moiveTitle = jsonData.results[i].title;
+// console.log("1st set: " + moiveTitle);
+// var movieReleaseDate = jsonData.results[i].release_year;
+// var movieRating = jsonData.results[i].rating;
+// var moivePoster = jsonData.results[i].poster_120x171;
 
 //var results = Guidebox.search.movies({field: 'title', query: 'Terminator'});
 
+// Guidebox.search.
+// movies({ field: 'title', query: 'Pretty Woman', limit: 10 })
+// .then(function(res) {
+//   var jsonData = res;
+//   console.log(jsonData);
+// })
+// .catch(function(e) {
+//   console.log(e);
+// });
 
-  // Guidebox.search.
-  // movies({ field: 'title', query: 'Pretty Woman', limit: 10 })
-  // .then(function(res) {
-  //   var jsonData = res;
-  //   console.log(jsonData);
-  // })
-  // .catch(function(e) {
-  //   console.log(e);
-  // });
+// var related = Guidebox.movies.related(135934);
 
-  // var related = Guidebox.movies.related(135934);
+// Guidebox.movies.
+// related(26347)
+// .then(function(res) {
+//   var jsonData = res;
+//   // console.log(jsonData);
+//   for (var i = 0; i < jsonData.results.length; i++) {
+//     console.log(
+//       "\nTitle: " +
+//         jsonData.results[i].title +
+//         "\nYear Released: " +
+//         jsonData.results[i].release_year +
+//         ", " +
+//         "\nRating: " +
+//         jsonData.results[i].rating +
+//         "\nImage: " +
+//         jsonData.results[i].poster_120x171
+//     );
+//   }
+// })
+// .catch(function(e) {
+//   console.log(e);
+// });
 
-  // Guidebox.movies.
-  // related(26347)
-  // .then(function(res) {
-  //   var jsonData = res;
-  //   // console.log(jsonData);
-  //   for (var i = 0; i < jsonData.results.length; i++) {
-  //     console.log(
-  //       "\nTitle: " +
-  //         jsonData.results[i].title +
-  //         "\nYear Released: " +
-  //         jsonData.results[i].release_year +
-  //         ", " +
-  //         "\nRating: " +
-  //         jsonData.results[i].rating +
-  //         "\nImage: " +
-  //         jsonData.results[i].poster_120x171
-  //     );
-  //   }
-  // })
-  // .catch(function(e) {
-  //   console.log(e);
-  // });
+// var sources = Guidebox.sources.list({ filter: 'movie', type: 'free' });
+// var movies = Guidebox.movies.list({ sources: 'free' });
 
-  // var sources = Guidebox.sources.list({ filter: 'movie', type: 'free' });
-  // var movies = Guidebox.movies.list({ sources: 'free' });
+// Guidebox.search.
+// movies({ field: 'title', query: 'Pretty Woman', limit: 10 })
 
-    // Guidebox.search.
-  // movies({ field: 'title', query: 'Pretty Woman', limit: 10 })
-
-  // Guidebox.moives.
-  // // list({ field: 'title', query: 'Pretty Woman', sources: 'free' })
-  // list({ limit: 10 })
-  // .then(function(res) {
-  //   var jsonData = res;
-  //   console.log(jsonData);
-  // })
-  // .catch(function(e) {
-  //   console.log(e);
-  // });
+// Guidebox.moives.
+// // list({ field: 'title', query: 'Pretty Woman', sources: 'free' })
+// list({ limit: 10 })
+// .then(function(res) {
+//   var jsonData = res;
+//   console.log(jsonData);
+// })
+// .catch(function(e) {
+//   console.log(e);
+// });
 
 module.exports = function(app) {
+  // eslint-disable-next-line no-unused-vars
   app.get("/api/query", function(req, res) {
-
     console.log("search: " + req);
-    Guidebox.search.
-      movies({ query: req.body })
-      .then(function(res) {
-
-      })
-    .catch(function(e) {
-      console.log(e);
-    });
+    Guidebox.search
+      .movies({ query: req.body })
+      // eslint-disable-next-line no-unused-vars
+      .then(function(res) {})
+      .catch(function(e) {
+        console.log(e);
+      });
   });
 
   // Get all examples
@@ -146,22 +116,21 @@ module.exports = function(app) {
     });
   });
 
-  // Create a new example
+// Create a new example
 
-  // will have to call the api's twice
-  // when they click on the image/link it will initilize the api on the backend
-  // 
+// will have to call the api's twice
+// when they click on the image/link it will initilize the api on the backend
+
   app.get("/api/:id", function(req, res) {
-
     var id = req.params.id;
-
   });
 
   // Delete an example by id
   app.delete("/api/examples/:id", function(req, res) {
-    db.Example.destroy({ where: { id: req.params.id } }).then(function(dbExample) {
+    db.Example.destroy({ where: { id: req.params.id } }).then(function(
+      dbExample
+    ) {
       res.json(dbExample);
     });
   });
 };
-
