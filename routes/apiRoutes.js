@@ -119,12 +119,16 @@ module.exports = function(app) {
 
   });
 
-  // Delete an example by id
-  app.get("/api/movie/:id", function(req, res) {
-    db.Example.destroy({ where: { id: req.params.id } }).then(function(dbExample) {
-      res.json(dbExample);
-    });
-  });
+  app.get("/api/channel", function(req, res) {
+
+    axios.get("http://api-public.guidebox.com/v2/channels?api_key=eebe5906010bcf88573d887c308bd62a53db60ca", {
+      type: "GET"
+    }).then(function(resChannel) {
+
+      // console.log(resChannel.data.results);
+      res.json(resChannel.data.results);
+    })
+  })
 };
 
 function insert(table, cols, vals, cb) {
