@@ -22,9 +22,13 @@ module.exports = function(app) {
   });
 
   // info routes
-  app.get("/info/:id", function(req, res) {
+  app.get("/info/", function(req, res) {
+
+
+    console.log(id);
     res.render("info", {
       msg: "Welcome!"
+
     });
   });
 
@@ -37,11 +41,8 @@ module.exports = function(app) {
 
   // favorite routes
   app.get("/favorite", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
       res.render("favorite", {
         msg: "Welcome!",
-        examples: dbExamples
-      });
     });
   });
 

@@ -4,127 +4,10 @@ var db = require("../models");
 var axios = require("axios");
 
 // require("dotenv").config();
-// var keys = require("..//keys");
 
 //I need to get the hide file to work for the API, so until then we need to enter it and pull it out before pushing the code to GitHub
 var Guidebox = require("guidebox")("eebe5906010bcf88573d887c308bd62a53db60ca");
 
-
-//Only pulls the top 10 movies, you can change the limit to show more
-// Guidebox.movies
-//   .list({ limit: 10 })
-//   .then(function(res) {
-//     var jsonData = res;
-//     console.log(jsonData.results[0].title);
-//     for (var i = 0; i < jsonData.results.length; i++) {
-//       console.log(
-//         "\nTitle: " +
-//           jsonData.results[i].title +
-//           "\nYear Released: " +
-//           jsonData.results[i].release_year +
-//           "\nRating: " +
-//           jsonData.results[i].rating +
-//           "\nImage: " +
-//           jsonData.results[i].poster_120x171
-//       );
-//     }
-//     console.log(res);
-//   })
-//   .catch(function(e) {
-//     console.log(e);
-//   });
-
-//Only pulls the top 10 movies, you can change the limit to show more
-// Guidebox.movies
-//   .list({ limit: 10 })
-//   .then(function(res) {
-//     var jsonData = res;
-//     // console.log(jsonData);
-//     for (var i = 0; i < jsonData.results.length; i++) {
-//       console.log(
-//         "\nApiID: " +
-//           jsonData.results[i].id +
-//         "\nTitle: " +
-//           jsonData.results[i].title +
-//           "\nYear Released: " +
-//           jsonData.results[i].release_year +
-//           ", " +
-//           "\nRating: " +
-//           jsonData.results[i].rating +
-//           "\nImage: " +
-//           jsonData.results[i].poster_120x171
-//       );
-//     }
-//   })
-//   .catch(function(e) {
-//     console.log(e);
-//   });
-
-
-
-
-        // var moiveId = jsonData.results[i].id;
-      // moiveTitle = jsonData.results[i].title;
-      // console.log("1st set: " + moiveTitle);
-      // var movieReleaseDate = jsonData.results[i].release_year;
-      // var movieRating = jsonData.results[i].rating;
-      // var moivePoster = jsonData.results[i].poster_120x171;
-
-
-//var results = Guidebox.search.movies({field: 'title', query: 'Terminator'});
-
-
-  // Guidebox.search.
-  // movies({ field: 'title', query: 'Pretty Woman', limit: 10 })
-  // .then(function(res) {
-  //   var jsonData = res;
-  //   console.log(jsonData);
-  // })
-  // .catch(function(e) {
-  //   console.log(e);
-  // });
-
-  // var related = Guidebox.movies.related(135934);
-
-  // Guidebox.movies.
-  // related(26347)
-  // .then(function(res) {
-  //   var jsonData = res;
-  //   // console.log(jsonData);
-  //   for (var i = 0; i < jsonData.results.length; i++) {
-  //     console.log(
-  //       "\nTitle: " +
-  //         jsonData.results[i].title +
-  //         "\nYear Released: " +
-  //         jsonData.results[i].release_year +
-  //         ", " +
-  //         "\nRating: " +
-  //         jsonData.results[i].rating +
-  //         "\nImage: " +
-  //         jsonData.results[i].poster_120x171
-  //     );
-  //   }
-  // })
-  // .catch(function(e) {
-  //   console.log(e);
-  // });
-
-  // var sources = Guidebox.sources.list({ filter: 'movie', type: 'free' });
-  // var movies = Guidebox.movies.list({ sources: 'free' });
-
-    // Guidebox.search.
-  // movies({ field: 'title', query: 'Pretty Woman', limit: 10 })
-
-  // Guidebox.moives.
-  // // list({ field: 'title', query: 'Pretty Woman', sources: 'free' })
-  // list({ limit: 10 })
-  // .then(function(res) {
-  //   var jsonData = res;
-  //   console.log(jsonData);
-  // })
-  // .catch(function(e) {
-  //   console.log(e);
-  // });
 
 module.exports = function(app) {
 
@@ -150,14 +33,11 @@ module.exports = function(app) {
     })
   });
 
-  // will have to call the api's twice
-  // when they click on the image/link it will initilize the api on the backend
-  // 
   app.get("/api/movieTwo", function(req, res) {
 
     var movieId = req.query.q;
-
     console.log(movieId);
+    console.log(req);
 
     // start the other API when the user clicks on the movie image
     axios.get("https://api-public.guidebox.com/v2/movies/" + movieId + "?api_key=eebe5906010bcf88573d887c308bd62a53db60ca", {
@@ -208,7 +88,7 @@ module.exports = function(app) {
     });
   });
 
-  app.get("/api/tvTwo/", function(req, res) {
+  app.get("/api/tvTwo", function(req, res) {
 
     var tvId = req.query.q;
 
@@ -218,28 +98,67 @@ module.exports = function(app) {
       data: tvId,
       type: "GET"
     }).then(function(resTv) {
-      console.log(resTv);
-      var data = resTv.results
-      var subcription = "";
-      console.log(data.web.episodes.all_sources);
-  
-      for (var i = 0; i < data.web.episodes.all_sources.length; i++) {
-        if (data.web.episodes.all_sources[i].type === "subscription") {
-          
-          subscription = data.web.episodes.all_sources[i].display_name;
-        }
-      }
-      console.log(subscription);
+      var data = resTv.data.results
 
-      
+      console.log(data);
+      res.json(data)
+
     })
   })
 
-  // Delete an example by id
-  app.get("/api/movie/:id", function(req, res) {
-    db.Example.destroy({ where: { id: req.params.id } }).then(function(dbExample) {
-      res.json(dbExample);
-    });
+  app.get("/api/info/", function(req, res) {
+
+    var id = req.query.q;
+
+    // axios.get("/api/info/" + id, {
+    //   data: id,
+    //   type: "GET"
+    // })
+
+
+
   });
+
+  app.get("/api/channel", function(req, res) {
+
+    axios.get("http://api-public.guidebox.com/v2/channels?api_key=eebe5906010bcf88573d887c308bd62a53db60ca", {
+      type: "GET"
+    }).then(function(resChannel) {
+
+      // console.log(resChannel.data.results);
+      res.json(resChannel.data.results);
+    })
+  })
 };
+
+function insert(table, cols, vals, cb) {
+  var queryString = "INSERT INTO " + table;
+
+  queryString += " (";
+  queryString += cols.toString();
+  queryString += ") ";
+  queryString += "VALUES (";
+  queryString += printQuestionMarks(vals.length);
+  queryString += ") ";
+
+  console.log(queryString);
+
+  connection.query(queryString, vals, function(err, result) {
+    if (err) {
+      throw err;
+    }
+
+    cb(result);
+  });
+}
+
+function printQuestionMarks(num) {
+  var arr = [];
+
+  for (var i = 0; i < num; i++) {
+    arr.push("?");
+  }
+
+  return arr.toString();
+}
 
