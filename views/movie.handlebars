@@ -1,11 +1,10 @@
-<div id="movie" style="height: 1000px; width 100px">
+<div id="movie">
   <div class="row">
-  <div class="col-8 offset-2">
-    <h1>{{msg}}</h1>
-    <h2><strong>movieShow</strong></h2>
+    <div class="col-12 ">
+      
     {{> header }}
-    
-      <form class="clearfix mb-4" action="POST">
+      
+        <form class="clearfix mb-4" action="POST">
         <div class="form-group">
           <label for="example-text" id="searchtext"><strong>SEARCH FOR A MOVIE </strong></label>
           <input type="text" id="movieInput" class="form-control" aria-describedby="example-text" placeholder=" TV SHOW OR MOVIE">
@@ -13,8 +12,28 @@
         
         <button id="submit" class="btn btn-primary float-right"><strong>Search</strong></button>
       </form>
+    </div>
+  </div>
+  
+  <div id="movieRow" class="row">
+
+  </div>
+
+  <div id="movieInfo" class="row">
+    <div id="selectedMovie" class="column">
+
+    </div>
+
+    <div id="movieLinks" class="column">
+      <p id="subscription">
+
+      </p>
+      
+    </div>
   </div>
 </div>
+      
+        
 
 <p>
     {{#each movies}}
@@ -28,15 +47,15 @@
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/index.js"></script>
+<link rel="stylesheet" href="/public/styles/styles.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
 <script>
   $(document).ready(function (){
-      $("#click").click(function (){
-          $('html, body').animate({
-              scrollTop: $("#movie").offset().top
-          }, 2000);
-      });
+    $("#click").click(function (){
+      $('html, body').animate({
+        scrollTop: $("#movie").offset().top
+      }, 2000);
+    });
   });
 </script>
-
 

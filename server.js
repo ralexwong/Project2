@@ -6,6 +6,7 @@ var exphbs = require("express-handlebars");
 var Guidebox = require("guidebox")("eebe5906010bcf88573d887c308bd62a53db60ca");
 
 var db = require("./models");
+var axios = require("axios");
 
 var app = express();
 var PORT = process.env.PORT || 3000;
