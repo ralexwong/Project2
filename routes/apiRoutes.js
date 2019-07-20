@@ -1,14 +1,37 @@
-console.log("running");
+/* eslint-disable camelcase */
+console.log("******apiRoutes.js is running********");
 
 var db = require("../models");
 var axios = require("axios");
+MovieTwoData = []
 
 // require("dotenv").config();
 
 //I need to get the hide file to work for the API, so until then we need to enter it and pull it out before pushing the code to GitHub
 var Guidebox = require("guidebox")("eebe5906010bcf88573d887c308bd62a53db60ca");
 
+var getMoviesTwoData = function(res) {
+  MovieTwoData = [];
+  for (var i = 0; i < res.results.length; i++) {
+    topMovieData.push({
+      // type: type,
+      // query: query,
+      api_id: res.results[i].id,
+      title: res.results[i].title,
+      release_year: res.results[i].release_year,
+      rating: res.results[i].rating,
+      image_url: res.results[i].poster_120x171
+    });
+  }
+  console.log("this is running");
+  // console.log(topMovieData);
+};
 
+
+<<<<<<< HEAD
+
+=======
+>>>>>>> origin
 module.exports = function(app) {
 
   app.get("/api/movie", function(req, res) { //movie?query=xxxx
@@ -46,7 +69,7 @@ module.exports = function(app) {
     }).then(function(resMovie) {
 
       var data = resMovie.data
-      console.log(data);
+      // console.log(data);
       res.json(data);
 
       var id = data.id;
@@ -98,6 +121,24 @@ module.exports = function(app) {
       data: tvId,
       type: "GET"
     }).then(function(resTv) {
+<<<<<<< HEAD
+      console.log(resTv);
+      var data = resTv.results
+      var subcription = "";
+      console.log(data.web.episodes.all_sources);
+  
+      for (var i = 0; i < data.web.episodes.all_sources.length; i++) {
+        if (data.web.episodes.all_sources[i].type === "subscription") {
+          
+          subscription = data.web.episodes.all_sources[i].display_name;
+        }
+      }
+      console.log(subscription);
+      
+    })
+  })
+}
+=======
       var data = resTv.data.results
 
       console.log(data);
@@ -130,6 +171,7 @@ module.exports = function(app) {
     })
   })
 };
+>>>>>>> origin
 
 function insert(table, cols, vals, cb) {
   var queryString = "INSERT INTO " + table;

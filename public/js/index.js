@@ -1,4 +1,12 @@
+<<<<<<< HEAD
+// Console.log("**********index.js is running*********")
+
+// http://api-public.guidebox.com/v2/{endpoint}  <---- BASE API URL
+
+// handleFormSubmit is called whenever we submit a new example
+=======
 // handleFormSubmit is called whenever the user hits submit/enter
+>>>>>>> origin
 var handleFormSubmit = function(event) {
   event.preventDefault();
   
