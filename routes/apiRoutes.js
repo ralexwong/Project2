@@ -6,7 +6,6 @@ var axios = require("axios");
 MovieTwoData = []
 
 // require("dotenv").config();
-// var keys = require("..//keys");
 
 //I need to get the hide file to work for the API, so until then we need to enter it and pull it out before pushing the code to GitHub
 var Guidebox = require("guidebox")("eebe5906010bcf88573d887c308bd62a53db60ca");
@@ -29,7 +28,10 @@ var getMoviesTwoData = function(res) {
 };
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin
 module.exports = function(app) {
 
   app.get("/api/movie", function(req, res) { //movie?query=xxxx
@@ -54,14 +56,11 @@ module.exports = function(app) {
     })
   });
 
-  // will have to call the api's twice
-  // when they click on the image/link it will initilize the api on the backend
-  // 
   app.get("/api/movieTwo", function(req, res) {
 
     var movieId = req.query.q;
-
     console.log(movieId);
+    console.log(req);
 
     // start the other API when the user clicks on the movie image
     axios.get("https://api-public.guidebox.com/v2/movies/" + movieId + "?api_key=eebe5906010bcf88573d887c308bd62a53db60ca", {
@@ -112,7 +111,7 @@ module.exports = function(app) {
     });
   });
 
-  app.get("/api/tvTwo/", function(req, res) {
+  app.get("/api/tvTwo", function(req, res) {
 
     var tvId = req.query.q;
 
@@ -122,6 +121,7 @@ module.exports = function(app) {
       data: tvId,
       type: "GET"
     }).then(function(resTv) {
+<<<<<<< HEAD
       console.log(resTv);
       var data = resTv.results
       var subcription = "";
@@ -137,5 +137,70 @@ module.exports = function(app) {
       
     })
   })
+}
+=======
+      var data = resTv.data.results
+
+      console.log(data);
+      res.json(data)
+
+    })
+  })
+
+  app.get("/api/info/", function(req, res) {
+
+    var id = req.query.q;
+
+    // axios.get("/api/info/" + id, {
+    //   data: id,
+    //   type: "GET"
+    // })
+
+
+
+  });
+
+  app.get("/api/channel", function(req, res) {
+
+    axios.get("http://api-public.guidebox.com/v2/channels?api_key=eebe5906010bcf88573d887c308bd62a53db60ca", {
+      type: "GET"
+    }).then(function(resChannel) {
+
+      // console.log(resChannel.data.results);
+      res.json(resChannel.data.results);
+    })
+  })
+};
+>>>>>>> origin
+
+function insert(table, cols, vals, cb) {
+  var queryString = "INSERT INTO " + table;
+
+  queryString += " (";
+  queryString += cols.toString();
+  queryString += ") ";
+  queryString += "VALUES (";
+  queryString += printQuestionMarks(vals.length);
+  queryString += ") ";
+
+  console.log(queryString);
+
+  connection.query(queryString, vals, function(err, result) {
+    if (err) {
+      throw err;
+    }
+
+    cb(result);
+  });
+}
+
+function printQuestionMarks(num) {
+  var arr = [];
+
+  for (var i = 0; i < num; i++) {
+    arr.push("?");
+  }
+
+  return arr.toString();
 }
 

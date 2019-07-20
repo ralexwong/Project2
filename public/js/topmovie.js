@@ -29,6 +29,7 @@ function moviePageInfo(dbMovieData) {
         
         row.append("<img src=" + dbMovieData[i].image_url + ">" );
         row.append("<div>" + dbMovieData[i].title + "</div>");
+        
         // var img = dbMovieData[i].image_url;
         // var id = dbMovieData[i].api_id;
         // var tit = dbMovieData[i].title

@@ -1,34 +1,28 @@
-<div id="movie">
+<div class="container">
   <div class="row">
-    <div class="col-12 ">
-      
-    {{> header }}
-      
-        <form class="clearfix mb-4" action="POST">
-        <div class="form-group">
-          <label for="example-text" id="searchtext"><strong>SEARCH FOR A MOVIE </strong></label>
-          <input type="text" id="movieInput" class="form-control" aria-describedby="example-text" placeholder=" TV SHOW OR MOVIE">
-        </div>
+    <div class="col-12">
+      {{> header }} 
+      <form class="clearfix mb-4" action="POST">
+      <div class="form-group">
+        <label for="example-text" id="searchtext"><strong>SEARCH FOR A MOVIE </strong></label>
+        <input type="text" id="movieInput" class="form-control" aria-describedby="example-text" placeholder=" TV SHOW OR MOVIE">
+      </div>
         
-        <button id="submit" class="btn btn-primary float-right"><strong>Search</strong></button>
+      <button id="submit" class="btn btn-primary float-right"><strong>Search</strong></button>
       </form>
-    </div>
-  </div>
-  
-  <div id="movieRow" class="row">
 
-  </div>
+      <div id="movieRow" class="row">
 
-  <div id="movieInfo" class="row">
-    <div id="selectedMovie" class="column">
+      </div>
 
-    </div>
+      <div id="movieInfo" class="row">
+        <div id="selectedMovie" class="column">
 
-    <div id="movieLinks" class="column">
-      <p id="subscription">
+      </div>
 
-      </p>
-      
+      <div id="movieLinks" class="column">
+
+      </div>
     </div>
   </div>
 </div>
@@ -45,9 +39,13 @@
 
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<<<<<<< HEAD
 <script src="/js/index.js"></script>
 <script src="/js/topmovies.js"></script>
 
+=======
+<script src="/js/movie.js"></script>
+>>>>>>> origin
 <link rel="stylesheet" href="/public/styles/styles.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
 <script>
