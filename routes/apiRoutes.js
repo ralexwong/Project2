@@ -1,8 +1,9 @@
 /* eslint-disable camelcase */
-console.log("running");
+console.log("******apiRoutes.js is running********");
 
 var db = require("../models");
 var axios = require("axios");
+MovieTwoData = []
 
 // require("dotenv").config();
 // var keys = require("..//keys");
@@ -10,122 +11,26 @@ var axios = require("axios");
 //I need to get the hide file to work for the API, so until then we need to enter it and pull it out before pushing the code to GitHub
 var Guidebox = require("guidebox")("eebe5906010bcf88573d887c308bd62a53db60ca");
 
+var getMoviesTwoData = function(res) {
+  MovieTwoData = [];
+  for (var i = 0; i < res.results.length; i++) {
+    topMovieData.push({
+      // type: type,
+      // query: query,
+      api_id: res.results[i].id,
+      title: res.results[i].title,
+      release_year: res.results[i].release_year,
+      rating: res.results[i].rating,
+      image_url: res.results[i].poster_120x171
+    });
+  }
+  console.log("this is running");
+  // console.log(topMovieData);
+};
 
-// //Only pulls the top 10 movies, you can change the limit to show more
-// Guidebox.movies
-//   .list({ limit: 10 })
-//   .then(function(res) {
-//     // console.log(res.results[0]);
-//     for (var i = 0; i < res.results.length; i++) {
-//       console.log(
-//         "\nAPI_ID: " +
-//           res.results[i].id +
-//           "\nTitle: " +
-//           res.results[i].title +
-//           "\nYear Released: " +
-//           res.results[i].release_year +
-//           "\nRating: " +
-//           res.results[i].rating +
-//           "\nImage: " +
-//           res.results[i].poster_120x171
-//       );
-//     }
-//     // console.log(res);
-//   })
-//   .catch(function(e) {
-//     console.log(e);
-//   });
 
-// var moiveId = jsonData.results[i].id;
-// moiveTitle = jsonData.results[i].title;
-// console.log("1st set: " + moiveTitle);
-// var movieReleaseDate = jsonData.results[i].release_year;
-// var movieRating = jsonData.results[i].rating;
-// var moivePoster = jsonData.results[i].poster_120x171;
-
-//var results = Guidebox.search.movies({field: 'title', query: 'Terminator'});
-
-// Guidebox.search.
-// movies({ field: 'title', query: 'Pretty Woman', limit: 10 })
-// .then(function(res) {
-//   var jsonData = res;
-//   console.log(jsonData);
-// })
-// .catch(function(e) {
-//   console.log(e);
-// });
-
-// var related = Guidebox.movies.related(135934);
-
-// Guidebox.movies.
-// related(26347)
-// .then(function(res) {
-//   var jsonData = res;
-//   // console.log(jsonData);
-//   for (var i = 0; i < jsonData.results.length; i++) {
-//     console.log(
-//       "\nTitle: " +
-//         jsonData.results[i].title +
-//         "\nYear Released: " +
-//         jsonData.results[i].release_year +
-//         ", " +
-//         "\nRating: " +
-//         jsonData.results[i].rating +
-//         "\nImage: " +
-//         jsonData.results[i].poster_120x171
-//     );
-//   }
-// })
-// .catch(function(e) {
-//   console.log(e);
-// });
-
-// var sources = Guidebox.sources.list({ filter: 'movie', type: 'free' });
-// var movies = Guidebox.movies.list({ sources: 'free' });
-
-// Guidebox.search.
-// movies({ field: 'title', query: 'Pretty Woman', limit: 10 })
-
-// Guidebox.moives.
-// // list({ field: 'title', query: 'Pretty Woman', sources: 'free' })
-// list({ limit: 10 })
-// .then(function(res) {
-//   var jsonData = res;
-//   console.log(jsonData);
-// })
-// .catch(function(e) {
-//   console.log(e);
-// });
 
 module.exports = function(app) {
-<<<<<<< HEAD
-  // eslint-disable-next-line no-unused-vars
-  app.get("/api/query", function(req, res) {
-    console.log("search: " + req);
-    Guidebox.search
-      .movies({ query: req.body })
-      // eslint-disable-next-line no-unused-vars
-      .then(function(res) {})
-      .catch(function(e) {
-        console.log(e);
-      });
-  });
-
-  // Get all examples
-  app.get("/api/examples", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
-      res.json(dbExamples);
-    });
-  });
-
-// Create a new example
-
-// will have to call the api's twice
-// when they click on the image/link it will initilize the api on the backend
-
-  app.get("/api/:id", function(req, res) {
-    var id = req.params.id;
-=======
 
   app.get("/api/movie", function(req, res) { //movie?query=xxxx
 
@@ -165,7 +70,7 @@ module.exports = function(app) {
     }).then(function(resMovie) {
 
       var data = resMovie.data
-      console.log(data);
+      // console.log(data);
       res.json(data);
 
       var id = data.id;
@@ -205,7 +110,6 @@ module.exports = function(app) {
       }
       res.json(tvArray);
     });
->>>>>>> origin
   });
 
   app.get("/api/tvTwo/", function(req, res) {
@@ -230,22 +134,8 @@ module.exports = function(app) {
         }
       }
       console.log(subscription);
-
       
     })
   })
+}
 
-  // Delete an example by id
-<<<<<<< HEAD
-  app.delete("/api/examples/:id", function(req, res) {
-    db.Example.destroy({ where: { id: req.params.id } }).then(function(
-      dbExample
-    ) {
-=======
-  app.get("/api/movie/:id", function(req, res) {
-    db.Example.destroy({ where: { id: req.params.id } }).then(function(dbExample) {
->>>>>>> origin
-      res.json(dbExample);
-    });
-  });
-};

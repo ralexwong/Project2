@@ -1,20 +1,21 @@
 /* eslint-disable camelcase */
-console.log("running");
+console.log("**********topmovie-api-routes.js is running **********");
 
 var db = require("../models");
+var Sequelize = require("sequelize");
 var topMovieID = [];
-var topMovieData = [];
+var apiMovieData = [];
 
 // require("dotenv").config();
 // var keys = require("..//keys");
 
 //I need to get the hide file to work for the API, so until then we need to enter it and pull it out before pushing the code to GitHub
-var Guidebox = require("guidebox")("eebe5906010bcf88573d887c308bd62a53db60ca");
+var Guidebox = require("guidebox")("75c3c283088584b71e808e08c6a5af30a76f10c4");
 
 var getTopMoviesData = function(res) {
-  topMovieData = [];
+  apiMovieData = [];
   for (var i = 0; i < res.results.length; i++) {
-    topMovieData.push({
+    apiMovieData.push({
       // type: type,
       // query: query,
       api_id: res.results[i].id,
@@ -24,26 +25,83 @@ var getTopMoviesData = function(res) {
       image_url: res.results[i].poster_120x171
     });
   }
-  console.log("this is running");
-  console.log(topMovieData);
+  console.log("+++++topMovieData push array is running++++++");
+  // console.log(topMovieData);
 };
 
-// var CheckDbTopMovie = function(
-// db.topMovieData.findAll({
-//   where:{
+// var CheckDbTopMovie = function() {
 
-//   }
-// })
-// )
+// }
+
+// function getSQLTopMovieDB () {
+//   return topMovieData
+//   .findAll()
+//   .then(function(topMovieData) {
+//     return topMovieData
+//   });
+// }
+
+var returnTopMovData = function(data) {
+  topMovieData.findAll({
+    where: {
+      api_id: {
+        [Op.im]: topMovieID
+      }
+    }
+  }).then(function(data) {
+    var results = [];
+    for(var i = 0; i < data.length; i++)
+    results.push(data[i].dataValues);
+  })
+}
+
+var getDBTopMovie = function(dbtopMovieData, cb) {
+  // var Op = sequelized.Op;
+  api_id = [];
+  for(var i = 0; i < data.title.items.length; i++) {
+    api_id.push(data.title.item[i].id);
+  }
+  console.log("++++++ api_id: " + api_id + "+++++++++");
+}
+
 
 module.exports = function(app) {
-  app.get("/api/topMovieData", function(req, res) {
+ app.get("/api/topmoviedata", function(req, res) {
+   db.topMovieData.findAll({}).then(function(dbtopMovieData) {
+     res.json(dbtopMovieData);
+   });
+ });
+
+ app.post("/api/topmoviedata", function(req, res) {
+   console.log(res.body);
+   db.topMovieData.create({
+     text: req.body.text,
+     complete: req.body.complete
+   }).then(function(topMovieData) {
+     res.json(topMovieData)
+   });
+ });
+
+   // POST route for saving a new post
+   app.post("/api/topmoviedata", function(req, res) {
     db.topMovieData.create(req.body).then(function(dbtopMovieData) {
       res.json(dbtopMovieData);
     });
   });
 
-  app.get("/app/topMovieData/:id", function(req, res) {
+  app.put("api/topmoviedata", function(req, res) {
+    db.topMovieData.update(
+      req.body,
+      {
+        where: {
+          id: req.body.id
+        }
+      }).then(function(dbtopMovieData) {
+        res.json(dbtopMovieData);
+      });
+  });
+
+  app.get("/app/topmoviedata/:id", function(req, res) {
     db.topMovieData
       .findOne({
         where: {
@@ -55,13 +113,7 @@ module.exports = function(app) {
       });
   });
 
-  app.post("/api/topMovieData", function(req, res) {
-    db.topMovieData.create(req.body).then(function(dbtopMovieData) {
-      res.json(dbtopMovieData);
-    });
-  });
-
-  app.delete("/api/topMovieData/:id", function(req, res) {
+  app.delete("/api/topmoviedata/:id", function(req, res) {
     db.topMovieData
       .destroy({
         where: {
@@ -83,4 +135,6 @@ Guidebox.movies.list({ limit: 10 }).then(function(res) {
   // console.log(res);
   // console.log(topMovieID);
   getTopMoviesData(res);
+  // getDBTopMovie()
+  // returnTopMovData()
 });

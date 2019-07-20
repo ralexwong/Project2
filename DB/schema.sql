@@ -1,6 +1,12 @@
 DROP DATABASE IF EXISTS movieDB;
 CREATE DATABASE movieDB;
 
+//topmovies
+//toptvshows
+//USER
+//favortes
+//
+
 USE movieDB;
 
 -- CREATE TABLE shows (

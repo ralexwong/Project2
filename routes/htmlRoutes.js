@@ -3,16 +3,8 @@ var db = require("../models");
 module.exports = function(app) {
   // home page
   app.get("/", function(req, res) {
-<<<<<<< HEAD
-    db.topMovieData.findAll({}).then(function(dbExamples) {
-      res.render("home", {
-        msg: "Welcome!",
-        // examples: dbExamples
-      });
-=======
     res.render("home", {
       msg: "Welcome!",
->>>>>>> origin
     });
   });
 
@@ -40,11 +32,6 @@ module.exports = function(app) {
   app.get("/tv", function(req, res) {
       res.render("tv", {
         msg: "Welcome!",
-<<<<<<< HEAD
-        examples: data
-      });
-=======
->>>>>>> origin
     });
   });
 
@@ -57,22 +44,21 @@ module.exports = function(app) {
       });
     });
   });
-<<<<<<< HEAD
-  app.get("/topMovieData", function(req, res) {
-    db.topMovieData.findAll({}).then(function(topMovieData) {
-      res.render("home", {
-        msg: "Welcome!",
-        examples: topMovieData
-      });
-=======
 
   // channel routes
   app.get("/channel", function(req, res) {
     res.render("channel", {
       msg: "Welcome!",
->>>>>>> origin
     });
   });
+
+  //topmovies routes
+  app.get("/topmoviedata", function(req, res) {
+    res.render("home", {
+      meg: "Top Movies!",
+    });
+  });
+
   // Render 404 page for any unmatched routes
   app.get("*", function(req, res) {
     res.render("404");

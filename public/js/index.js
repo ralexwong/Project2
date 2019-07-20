@@ -1,10 +1,5 @@
-<<<<<<< HEAD
+// Console.log("**********index.js is running*********")
 
-
-
-
-=======
->>>>>>> origin
 // http://api-public.guidebox.com/v2/{endpoint}  <---- BASE API URL
 
 // handleFormSubmit is called whenever we submit a new example
