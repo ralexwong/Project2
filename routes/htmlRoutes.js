@@ -52,14 +52,6 @@ module.exports = function(app) {
       msg: "Welcome!",
     });
   });
-
-  //topmovies routes
-  app.get("/topmoviedata", function(req, res) {
-    res.render("home", {
-      meg: "Top Movies!",
-    });
-  });
-
   // Render 404 page for any unmatched routes
   app.get("*", function(req, res) {
     res.render("404");
